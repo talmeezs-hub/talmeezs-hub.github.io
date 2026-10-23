@@ -6,13 +6,13 @@
   <title>Talmeezs website</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
   <script>
     // Skip the welcome screen if it was already seen during this visit.
     try { if (sessionStorage.getItem("welcomed")) document.documentElement.classList.add("welcomed"); } catch (e) {}
   </script>
 </head>
-<body class="light-top">
+<body>
   <div class="welcome" id="welcome" role="dialog" aria-label="Welcome">
     <div class="welcome-inner">
       <p class="welcome-kicker">Welcome to</p>
@@ -31,16 +31,13 @@
     </nav>
   </header>
 
-  <div class="hero hero-home">
-    <h1>What I do</h1>
+  <div class="home-top">
+    <h1 class="rainbow-type" aria-label="I Vibe Code Things"><span class="typed" data-text="I Vibe Code Things" aria-hidden="true">I Vibe Code Things</span><span class="caret" aria-hidden="true"></span></h1>
     <div class="bar"></div>
+    <p class="tagline">meaning I use <span class="rainbow">LLMS</span> to code</p>
   </div>
 
   <main>
-    <section class="intro">
-      <h2 class="rainbow-type" aria-label="I Vibe Code Things"><span class="typed" data-text="I Vibe Code Things" aria-hidden="true">I Vibe Code Things</span><span class="caret" aria-hidden="true"></span></h2>
-      <p>meaning I use LLMS to code</p>
-    </section>
 
     <hr>
 
@@ -62,6 +59,6 @@
     </section>
   </main>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=4"></script>
 </body>
 </html>
