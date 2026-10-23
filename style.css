@@ -424,6 +424,7 @@ body::after {
 /* Urdu uses its own script: joined letters, so no letter spacing */
 .welcome-kicker:lang(ur) {
   font-family: "Noto Nastaliq Urdu", serif;
+  font-size: clamp(24px, 3.6vw, 38px);
   letter-spacing: 0;
   line-height: 1;
 }
