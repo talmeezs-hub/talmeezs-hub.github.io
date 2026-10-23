@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects - Talmeezs website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=11">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="index.html">Talmeezs website</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <span class="dot">·</span>
+      <a class="active" href="projects.html">Projects</a>
+      <span class="dot">·</span>
+      <a href="anti-ai.html">How I feel about Anti-AI</a>
+    </nav>
+  </header>
+
+  <div class="home-top">
+    <h1 class="rainbow-title glitch">My Projects</h1>
+    <div class="bar"></div>
+    <p class="tagline">The stuff I vibe coded that I'm actually proud of.</p>
+  </div>
+
+  <main class="projects">
+
+    <!-- AOS -->
+    <article class="project">
+      <div class="project-media gallery">
+        <a class="gallery-main" href="images/projects/aos-desktop.png" target="_blank" rel="noopener">
+          <img src="images/projects/aos-desktop.png" alt="The AOS desktop with the Write app open, a taskbar and a Find apps search box" width="1280" height="800">
+        </a>
+        <div class="gallery-thumbs">
+          <button type="button" class="thumb is-active" data-src="images/projects/aos-desktop.png" data-alt="The AOS desktop with the Write app open, a taskbar and a Find apps search box">
+            <img src="images/projects/aos-desktop.png" alt="" width="1280" height="800">
+            <span>Desktop</span>
+          </button>
+          <button type="button" class="thumb" data-src="images/projects/aos-start-menu.png" data-alt="The AOS Start menu with search and pinned apps">
+            <img src="images/projects/aos-start-menu.png" alt="" width="1280" height="800">
+            <span>Start menu</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="project-info">
+        <p class="project-kicker">Operating system</p>
+        <h2 class="glitch">AOS</h2>
+        <p class="project-blurb">My own operating system. Not a Linux skin, not a theme. A real 64-bit OS that boots through UEFI and runs on a <span class="rainbow">Rust kernel</span>.</p>
+        <ul class="features">
+          <li>A full-color desktop with a taskbar and a searchable Start menu</li>
+          <li>Built-in Files, Notes, Write, Terminal, Programs and a Store</li>
+          <li>Runs its own native <code>.AIS</code> apps</li>
+          <li>Keyboard, mouse and its own FAT12 file system</li>
+          <li>Builds into a bootable ISO (tested in QEMU)</li>
+        </ul>
+        <ul class="tags" aria-label="Built with">
+          <li>Rust</li><li>x86-64</li><li>UEFI</li><li>Kernel</li>
+        </ul>
+        <div class="project-buttons">
+          <a class="button" href="https://github.com/TerminalDev-1/AOS" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="button button-ghost" href="https://github.com/TerminalDev-1/AOS/blob/HEAD/BUILDING.md" target="_blank" rel="noopener">How to build it</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- AstroArena -->
+    <article class="project project-flip">
+      <div class="project-media">
+        <div class="astro-art" role="img" aria-label="AstroArena artwork: Spark, a glossy blue star, over a glowing arena grid">
+          <svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="aa-sky" cx="50%" cy="35%" r="75%">
+                <stop offset="0" stop-color="#1d3f9e"/>
+                <stop offset="1" stop-color="#050b1a"/>
+              </radialGradient>
+              <linearGradient id="aa-star" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#7fd8ff"/>
+                <stop offset="0.5" stop-color="#2f8bff"/>
+                <stop offset="1" stop-color="#1a3fc4"/>
+              </linearGradient>
+              <linearGradient id="aa-gloss" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff" stop-opacity="0.85"/>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="aa-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="8" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <rect width="640" height="400" fill="url(#aa-sky)"/>
+            <!-- arena floor grid in perspective -->
+            <g stroke="#38d6ff" stroke-opacity="0.35" stroke-width="1.5" fill="none">
+              <path d="M0 300 H640 M0 330 H640 M0 365 H640 M0 400 H640"/>
+              <path d="M320 260 L-80 400 M320 260 L80 400 M320 260 L240 400 M320 260 L400 400 M320 260 L560 400 M320 260 L720 400"/>
+            </g>
+            <ellipse cx="320" cy="330" rx="120" ry="20" fill="#38d6ff" opacity="0.25"/>
+            <!-- Spark: a glossy blue star -->
+            <g class="astro-star" filter="url(#aa-glow)">
+              <path d="M320 70 L352 160 L446 162 L371 219 L398 310 L320 256 L242 310 L269 219 L194 162 L288 160 Z"
+                    fill="url(#aa-star)" stroke="#bff0ff" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M320 86 L346 158 L420 166 L360 184 Q320 172 280 184 L220 166 L294 158 Z" fill="url(#aa-gloss)" opacity="0.7"/>
+              <ellipse cx="300" cy="205" rx="10" ry="15" fill="#06123a"/>
+              <ellipse cx="340" cy="205" rx="10" ry="15" fill="#06123a"/>
+              <circle cx="303" cy="199" r="4" fill="#fff"/>
+              <circle cx="343" cy="199" r="4" fill="#fff"/>
+              <path d="M304 232 Q320 244 336 232" stroke="#06123a" stroke-width="5" fill="none" stroke-linecap="round"/>
+            </g>
+            <!-- sparks -->
+            <g fill="#ffd400">
+              <circle cx="150" cy="110" r="4"/><circle cx="500" cy="90" r="5"/><circle cx="530" cy="230" r="3"/><circle cx="110" cy="240" r="3"/>
+            </g>
+            <g fill="#ff2bd6"><circle cx="470" cy="140" r="3"/><circle cx="175" cy="190" r="4"/></g>
+          </svg>
+          <span class="astro-art-label">ASTROARENA</span>
+        </div>
+      </div>
+
+      <div class="project-info">
+        <p class="project-kicker">Android game <span class="badge">Beta</span></p>
+        <h2 class="glitch">AstroArena</h2>
+        <p class="project-blurb">An open-source game made to be <span class="rainbow">very close to Brawl Stars</span>, built so anyone can clone it, fork it and make it their own. No game engine: every fighter, arena, sound and song is generated in code.</p>
+        <ul class="features">
+          <li>5 fighters (Spark, Bark, Kira, Kito and Buddy), each with a super and a Hyper</li>
+          <li>Last Spark free-for-all, Knockout Rush 3v3, Boss Mode, 1v1 against real players, and a Training Area</li>
+          <li>Arena Boxes, Cups, upgrades, the Spark Road and a shop</li>
+          <li>Smart bots, from Easy to Elite</li>
+          <li>Custom OpenGL ES 3.0 graphics and its own Python game server</li>
+        </ul>
+        <ul class="tags" aria-label="Built with">
+          <li>Kotlin</li><li>OpenGL ES</li><li>Android</li><li>Python</li><li>Open source</li>
+        </ul>
+        <div class="project-buttons">
+          <a class="button" href="https://github.com/TerminalDev-1/AstroArena" target="_blank" rel="noopener">View on GitHub</a>
+          <a class="button button-ghost" href="https://github.com/TerminalDev-1/AstroArena/releases" target="_blank" rel="noopener">Download for Android</a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <script src="script.js?v=11"></script>
+</body>
+</html>

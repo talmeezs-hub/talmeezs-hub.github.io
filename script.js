@@ -13,6 +13,20 @@ document.querySelectorAll(".glitch").forEach((el) => {
   el.style.setProperty("--gd", `-${(Math.random() * 4.5).toFixed(2)}s`);
 });
 
+// Project galleries: clicking a thumbnail swaps the big screenshot.
+document.querySelectorAll(".gallery").forEach((gallery) => {
+  const link = gallery.querySelector(".gallery-main");
+  const img = link.querySelector("img");
+  gallery.querySelectorAll(".thumb").forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      img.src = thumb.dataset.src;
+      img.alt = thumb.dataset.alt;
+      link.href = thumb.dataset.src;
+      gallery.querySelectorAll(".thumb").forEach((t) => t.classList.toggle("is-active", t === thumb));
+    });
+  });
+});
+
 // Typewriter effect: type the heading out letter by letter, then pause and retype.
 function startTypewriter() {
   const typed = document.querySelector(".rainbow-type .typed");
