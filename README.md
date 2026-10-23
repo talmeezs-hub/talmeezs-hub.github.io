@@ -1,3 +1,3 @@
 # Talmeezs website
 
-My personal site, live at https://terminaldev-1.github.io
+My personal site, live at https://talmeezs-hub.github.io
