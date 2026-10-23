@@ -182,6 +182,73 @@ p {
 }
 .button:hover { filter: brightness(1.1); }
 
+/* Welcome screen */
+.welcome {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 16px;
+  background: var(--bg);
+  transition: transform 0.9s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.9s ease;
+}
+.welcome.leaving {
+  transform: translateY(-100%);
+  opacity: 0.6;
+}
+.welcomed .welcome { display: none; }
+.welcome-kicker {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-size: clamp(20px, 3vw, 30px);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: #777;
+  margin-bottom: 10px;
+  animation: rise 0.8s ease both;
+}
+.welcome-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: clamp(44px, 8vw, 104px);
+  line-height: 1.1;
+  animation: rise 0.8s 0.15s ease both;
+}
+.welcome-name {
+  background: linear-gradient(90deg, #ff3b3b, #ff9900, #ffd400, #2ecc40, #1e90ff, #8a2be2, #ff3bd4, #ff3b3b);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+.welcome .bar {
+  width: 150px;
+  height: 12px;
+  background: var(--gold);
+  margin: 30px auto 50px;
+  animation: rise 0.8s 0.3s ease both;
+}
+.welcome-go {
+  border: none;
+  cursor: pointer;
+  font-family: "Open Sans", sans-serif;
+  font-size: 26px;
+  padding: 14px 60px;
+  animation: rise 0.8s 0.45s ease both;
+  transition: transform 0.2s, filter 0.2s;
+}
+.welcome-go:hover { transform: scale(1.06); }
+.welcome-go:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+@media (prefers-reduced-motion: reduce) {
+  .welcome, .welcome * { animation: none !important; transition: opacity 0.3s !important; }
+  .welcome.leaving { transform: none; opacity: 0; }
+}
+
 @media (max-width: 800px) {
   .site-header { padding: 0 16px; height: 64px; }
   .site-title { font-size: 18px; letter-spacing: 1px; }

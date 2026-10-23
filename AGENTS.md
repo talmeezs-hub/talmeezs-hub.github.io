@@ -14,10 +14,10 @@ It started as a copy of their old Google Site (sites.google.com/view/talmeezssit
 
 ## Files
 
-- `index.html`: Home page. Plain off-white top (no banner image) with "What I do", a centered rainbow-shimmer typewriter "I Vibe Code Things", then "Why Do I Vibecode?" and a link to github.com/TerminalDev-1/Profile-README
+- `index.html`: Home page. Starts with a full-screen "Welcome to Talmeez's website" screen and a "Let's Go" button that slides it away. Then a plain off-white top (no banner image) with "What I do", a centered rainbow-shimmer typewriter "I Vibe Code Things", then "Why Do I Vibecode?" and a link to github.com/TerminalDev-1/Profile-README
 - `anti-ai.html`: "How I feel about Anti-AI" page
 - `style.css`: shared styles (Roboto headings, italic Open Sans body, gold accent `#c9a95c`)
-- `script.js`: makes the header turn white once the page is scrolled, and runs the typewriter effect on the Home heading
+- `script.js`: makes the header turn white once the page is scrolled, and runs the typewriter effect on the Home heading, and the welcome screen (shown once per visit, stored in sessionStorage)
 - `images/`: hero images for each page
 
 When you add a page, add it to the nav in every HTML file.

@@ -4,10 +4,12 @@ const update = () => header.classList.toggle("scrolled", window.scrollY > 40);
 window.addEventListener("scroll", update);
 update();
 
-// Typewriter effect: type the heading out letter by letter, then pause and retype.
-const typed = document.querySelector(".rainbow-type .typed");
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-if (typed && !calm) {
+
+// Typewriter effect: type the heading out letter by letter, then pause and retype.
+function startTypewriter() {
+  const typed = document.querySelector(".rainbow-type .typed");
+  if (!typed || calm) return;
   const text = typed.dataset.text;
   let i = 0;
   let deleting = false;
@@ -21,4 +23,24 @@ if (typed && !calm) {
     setTimeout(tick, delay);
   };
   setTimeout(tick, 400);
+}
+
+// Welcome screen: shown once per visit, slides away on "Let's Go".
+const welcome = document.getElementById("welcome");
+const alreadyWelcomed = document.documentElement.classList.contains("welcomed");
+
+if (welcome && !alreadyWelcomed) {
+  document.body.style.overflow = "hidden";
+  const go = document.getElementById("welcome-go");
+  go.focus();
+  go.addEventListener("click", () => {
+    try { sessionStorage.setItem("welcomed", "1"); } catch (e) {}
+    welcome.classList.add("leaving");
+    document.body.style.overflow = "";
+    startTypewriter();
+    welcome.addEventListener("transitionend", () => welcome.remove(), { once: true });
+    setTimeout(() => welcome.remove(), 1200); // in case transitionend never fires
+  });
+} else {
+  startTypewriter();
 }
