@@ -25,8 +25,9 @@ When you add a page, add it to the nav in every HTML file.
 ## How to ship a change
 
 1. Edit the files.
-2. Commit and push to `main`.
-3. GitHub Pages rebuilds in about a minute. Check the live URL after pushing.
+2. If you changed `style.css` or `script.js`, bump the `?v=` number on their links in every HTML file, so browsers fetch the new version instead of a stale cached copy.
+3. Commit and push to `main`.
+4. GitHub Pages rebuilds in about a minute. Check the live URL after pushing.
 
 ## Voice and content
 
