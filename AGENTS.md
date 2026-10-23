@@ -33,6 +33,6 @@ When you add a page, add it to the nav in every HTML file.
 
 - The user is a vibecoder: they design software and use LLMs to write the code.
 - They are loudly pro-AI and funny, and the all-caps are on purpose.
-- The user had the swear words removed from `anti-ai.html`. Don't add swearing back unless they ask. The Home page still has one ("GET THE FUCK OUT OF MY WEBSITE!"), and they haven't decided about it yet.
-- The repo was made private on request, which takes GitHub Pages offline on the free plan. To bring the site back, make the repo public again and re-enable Pages.
+- The user had all swear words removed from the site. Keep it swear-free unless they ask otherwise.
+- The repo must stay public: GitHub Pages doesn't serve private repos on the free plan.
 - Keep their wording as they wrote it. Don't clean up their text, tone it down, or fix their grammar unless they ask.
