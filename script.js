@@ -112,6 +112,64 @@ function runWarp(container, duration) {
   requestAnimationFrame(frame);
 }
 
+// Welcome line morph: scrambles between English, Russian and Urdu on a loop.
+const kicker = document.getElementById("welcome-kicker");
+let stopKickerMorph = () => {};
+
+if (kicker && !calm) {
+  const greetings = [
+    { text: "Welcome to", lang: "en", dir: "ltr" },
+    { text: "Добро пожаловать!", lang: "ru", dir: "ltr" },
+    { text: "خوش آمدید!", lang: "ur", dir: "rtl" },
+  ];
+  const symbols = "#%&*+=<>/\\[]{}01";
+  let index = 0;
+  let stopped = false;
+  let timer;
+
+  const morphTo = (next, onDone) => {
+    kicker.lang = next.lang;
+    kicker.dir = next.dir;
+    kicker.classList.add("morphing");
+    const target = next.text;
+    const pool = target.replace(/\s/g, "") + symbols;
+    const frames = 22;
+    const length = Math.max(kicker.textContent.length, target.length);
+    // Each character locks in at its own random moment, roughly left to right.
+    const lockAt = Array.from({ length }, (_, i) =>
+      Math.floor(frames * 0.35 * (i / length) + Math.random() * frames * 0.65));
+    let frame = 0;
+    const step = () => {
+      if (stopped) return;
+      let out = "";
+      for (let i = 0; i < length; i++) {
+        if (frame >= lockAt[i]) out += target[i] || "";
+        else out += pool[Math.floor(Math.random() * pool.length)];
+      }
+      kicker.textContent = out;
+      frame++;
+      if (frame <= frames) {
+        timer = setTimeout(step, 45);
+      } else {
+        kicker.textContent = target;
+        kicker.classList.remove("morphing");
+        onDone();
+      }
+    };
+    step();
+  };
+
+  const loop = () => {
+    timer = setTimeout(() => {
+      index = (index + 1) % greetings.length;
+      morphTo(greetings[index], loop);
+    }, 2200);
+  };
+  timer = setTimeout(loop, 600); // let the fade-in finish first
+
+  stopKickerMorph = () => { stopped = true; clearTimeout(timer); };
+}
+
 // Welcome screen: shown every time the Home page loads.
 // "Let's Go" fires the warp and the glitch at the same moment.
 const welcome = document.getElementById("welcome");
@@ -122,6 +180,7 @@ if (welcome) {
   go.focus();
   go.addEventListener("click", () => {
     go.disabled = true;
+    stopKickerMorph();
     const duration = calm ? 300 : 1000;
     if (!calm) runWarp(welcome, duration);
     welcome.classList.add("warping");

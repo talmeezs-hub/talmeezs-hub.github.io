@@ -414,6 +414,22 @@ body::after {
   text-shadow: 0 0 14px rgba(56, 214, 255, 0.6);
   margin-bottom: 10px;
   animation: rise 0.8s ease both;
+  /* fixed height so switching languages never makes the page jump */
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+/* Urdu uses its own script: joined letters, so no letter spacing */
+.welcome-kicker:lang(ur) {
+  font-family: "Noto Nastaliq Urdu", serif;
+  letter-spacing: 0;
+  line-height: 1;
+}
+/* Quick RGB-split while the text is morphing */
+.welcome-kicker.morphing {
+  text-shadow: -3px 0 #ff2bd6, 3px 0 #00f0ff, 0 0 14px rgba(56, 214, 255, 0.6);
 }
 .welcome-title {
   font-family: "Roboto", sans-serif;
