@@ -17,7 +17,7 @@ It started as a copy of their old Google Site (sites.google.com/view/talmeezssit
 - `index.html`: Home page. Starts with a full-screen "Welcome to Talmeez's website" screen and a "Let's Go" button that slides it away. The page then opens with a rainbow typewriter "I Vibe Code Things", then a big "meaning I use LLMS to code" with LLMS in rainbow, then "Why Do I Vibecode?" and a link to github.com/TerminalDev-1/Profile-README
 - `anti-ai.html`: "How I feel about Anti-AI" page
 - `style.css`: shared styles. Dark glossy cyber-blue theme (navy background with blue glows and a faint grid, cyan accent `#38d6ff`, glossy pill buttons), Roboto headings, italic Open Sans body, and a shared rainbow shimmer (`.rainbow`)
-- `script.js`: makes the header turn white once the page is scrolled, and runs the typewriter effect on the Home heading, and the welcome screen (shown every time the Home page loads; the user wants it that way)
+- `script.js`: glassy header on scroll, the Home typewriter, the heading glitch (any element with class `glitch`), the random whole-screen glitch flicker, and the welcome screen. The welcome screen shows on every Home load, and "Let's Go" runs a canvas hyperspace warp and a glitch at the same time. All motion is skipped when the visitor has reduce-motion turned on.
 - `images/`: hero images for each page
 
 When you add a page, add it to the nav in every HTML file.

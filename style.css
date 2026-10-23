@@ -241,7 +241,93 @@ p {
   box-shadow: 0 0 36px rgba(56, 214, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-/* Welcome screen */
+/* ---------- Glitch effects ---------- */
+
+/* Faint CRT scanlines over everything */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 3px);
+}
+
+/* Headings: every few seconds, cyan/magenta copies split and jitter */
+.glitch { position: relative; }
+.glitch::before,
+.glitch::after {
+  content: attr(data-glitch);
+  content: attr(data-glitch) / "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  text-shadow: none;
+  -webkit-text-fill-color: currentColor;
+}
+.glitch::before {
+  color: #ff2bd6;
+  animation: glitch-a 4.5s steps(1) infinite;
+  animation-delay: var(--gd, 0s);
+}
+.glitch::after {
+  color: #00f0ff;
+  animation: glitch-b 4.5s steps(1) infinite;
+  animation-delay: var(--gd, 0s);
+}
+@keyframes glitch-a {
+  0%, 86%, 100% { opacity: 0; transform: none; clip-path: inset(0 0 0 0); }
+  87% { opacity: 0.9; transform: translate(-5px, -1px); clip-path: inset(8% 0 62% 0); }
+  89% { opacity: 0.9; transform: translate(4px, 1px); clip-path: inset(55% 0 18% 0); }
+  91% { opacity: 0.9; transform: translate(-3px, 0); clip-path: inset(30% 0 42% 0); }
+  93% { opacity: 0.9; transform: translate(6px, -1px); clip-path: inset(76% 0 4% 0); }
+  95% { opacity: 0; }
+}
+@keyframes glitch-b {
+  0%, 87%, 100% { opacity: 0; transform: none; clip-path: inset(0 0 0 0); }
+  88% { opacity: 0.9; transform: translate(5px, 1px); clip-path: inset(40% 0 35% 0); }
+  90% { opacity: 0.9; transform: translate(-4px, -1px); clip-path: inset(4% 0 75% 0); }
+  92% { opacity: 0.9; transform: translate(3px, 1px); clip-path: inset(65% 0 10% 0); }
+  94% { opacity: 0.9; transform: translate(-6px, 0); clip-path: inset(20% 0 55% 0); }
+  96% { opacity: 0; }
+}
+
+/* Occasional whole-screen glitch flicker (triggered from script.js) */
+.screen-glitch {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  display: none;
+}
+.screen-glitch.on { display: block; }
+.screen-glitch span {
+  position: absolute;
+  left: 0; right: 0;
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.18), rgba(255, 43, 214, 0.18));
+  mix-blend-mode: screen;
+  animation: bar-jitter 0.12s steps(2) infinite;
+}
+@keyframes bar-jitter {
+  0% { transform: translateX(-12px); }
+  50% { transform: translateX(14px); }
+}
+.screen-glitching main,
+.screen-glitching .home-top,
+.screen-glitching .hero {
+  animation: screen-shake 0.3s steps(3) 1;
+}
+@keyframes screen-shake {
+  0% { transform: translateX(0); filter: none; }
+  33% { transform: translateX(-4px); filter: hue-rotate(60deg) saturate(1.6); }
+  66% { transform: translateX(5px); filter: hue-rotate(-40deg); }
+  100% { transform: none; filter: none; }
+}
+
+/* ---------- Welcome screen ---------- */
 .welcome {
   position: fixed;
   inset: 0;
@@ -254,11 +340,69 @@ p {
   background:
     radial-gradient(ellipse 70% 50% at 50% 40%, rgba(47, 107, 255, 0.35), transparent 70%),
     var(--bg);
-  transition: transform 0.9s cubic-bezier(0.7, 0, 0.2, 1), opacity 0.9s ease;
+  overflow: hidden;
 }
-.welcome.leaving {
-  transform: translateY(-100%);
-  opacity: 0.6;
+.welcome-inner { position: relative; z-index: 2; }
+
+/* Warp streaks are drawn on this canvas when "Let's Go" is pressed */
+.warp-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* "Let's Go": warp + glitch at the same time */
+.welcome.warping { animation: warp-out 1s ease-in forwards; }
+.welcome.warping .welcome-inner { animation: warp-glitch 1s steps(14) forwards; }
+.welcome.warping .welcome-title {
+  text-shadow: -6px 0 #ff2bd6, 6px 0 #00f0ff;
+}
+.welcome.warping::after {
+  /* bright flash in the center as we hit warp speed */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(220, 250, 255, 0.95), rgba(56, 214, 255, 0.4) 25%, transparent 60%);
+  opacity: 0;
+  animation: warp-flash 1s ease-in forwards;
+}
+@keyframes warp-out {
+  0%, 75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes warp-glitch {
+  0%   { transform: none; clip-path: inset(0 0 0 0); filter: none; }
+  8%   { transform: translate(-8px, 2px) skewX(8deg); clip-path: inset(0 0 45% 0); }
+  15%  { transform: translate(10px, -2px) skewX(-10deg) scale(1.05); clip-path: inset(30% 0 0 0); filter: hue-rotate(90deg); }
+  22%  { transform: translate(-6px, 0) scale(1.1); clip-path: inset(10% 0 20% 0); }
+  30%  { transform: translate(12px, 3px) skewX(14deg) scale(1.2); clip-path: inset(55% 0 5% 0); filter: hue-rotate(-60deg) saturate(2); }
+  40%  { transform: translate(-10px, -3px) scale(1.4); clip-path: inset(0 0 60% 0); }
+  50%  { transform: translate(8px, 0) skewX(-12deg) scale(1.7); clip-path: inset(20% 0 30% 0); filter: blur(1px); }
+  65%  { transform: scale(2.4); clip-path: inset(0 0 0 0); filter: blur(3px) brightness(1.6); opacity: 0.8; }
+  80%  { transform: scale(3.5); filter: blur(6px) brightness(2); opacity: 0.3; }
+  100% { transform: scale(5); filter: blur(10px); opacity: 0; }
+}
+@keyframes warp-flash {
+  0%, 55% { opacity: 0; }
+  75% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* The page punches in out of the warp */
+.arriving .home-top,
+.arriving main {
+  animation: arrive 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes arrive {
+  0%   { opacity: 0; transform: scale(1.15); filter: blur(10px) brightness(1.8); }
+  30%  { opacity: 1; transform: scale(1.04) translateX(-6px); filter: blur(2px) hue-rotate(60deg); }
+  45%  { transform: scale(1.02) translateX(5px); filter: hue-rotate(-40deg); }
+  100% { opacity: 1; transform: none; filter: none; }
 }
 .welcome-kicker {
   font-family: "Roboto", sans-serif;
@@ -304,8 +448,10 @@ p {
 
 @media (prefers-reduced-motion: reduce) {
   .rainbow-type .typed, .rainbow-type .caret, .rainbow, .welcome-name { animation: none; }
-  .welcome, .welcome * { animation: none !important; transition: opacity 0.3s !important; }
-  .welcome.leaving { transform: none; opacity: 0; }
+  .welcome, .welcome *, .welcome::after { animation: none !important; transition: opacity 0.3s !important; }
+  .welcome.warping { opacity: 0; }
+  .glitch::before, .glitch::after { display: none; }
+  .arriving .home-top, .arriving main { animation: none; }
 }
 
 /* Tablets */
