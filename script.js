@@ -25,16 +25,14 @@ function startTypewriter() {
   setTimeout(tick, 400);
 }
 
-// Welcome screen: shown once per visit, slides away on "Let's Go".
+// Welcome screen: shown every time the Home page loads, slides away on "Let's Go".
 const welcome = document.getElementById("welcome");
-const alreadyWelcomed = document.documentElement.classList.contains("welcomed");
 
-if (welcome && !alreadyWelcomed) {
+if (welcome) {
   document.body.style.overflow = "hidden";
   const go = document.getElementById("welcome-go");
   go.focus();
   go.addEventListener("click", () => {
-    try { sessionStorage.setItem("welcomed", "1"); } catch (e) {}
     welcome.classList.add("leaving");
     document.body.style.overflow = "";
     startTypewriter();
